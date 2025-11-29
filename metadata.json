@@ -1,0 +1,5 @@
+{
+  "name": "StickerGen AI - LINE Studio",
+  "description": "Create compliant LINE stickers and animations from a single image using Gemini 2.5 Flash.",
+  "requestFramePermissions": []
+}
