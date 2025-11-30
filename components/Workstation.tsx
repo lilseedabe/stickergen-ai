@@ -237,19 +237,14 @@ const Workstation: React.FC<WorkstationProps> = ({ onCreditUpdate }) => {
     setProgress(0);
     setError(null);
 
-    // Consume credits first
-    const consumed = await consumeCredits(resolution);
-    if (!consumed) {
-      setIsProcessing(false);
-      return;
-    }
-
-    // Clean up old URLs before starting new generation
+// Clean up old URLs before starting new generation
     activeUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
     activeUrlsRef.current.clear();
 
     setGeneratedImages([]);
     setIsPlaying(false);
+
+    let generationSucceeded = false; // 生成成功フラグ
 
     try {
 
@@ -281,6 +276,7 @@ const Workstation: React.FC<WorkstationProps> = ({ onCreditUpdate }) => {
         if (animationResults.length > 0) {
           setSelectedImageId(animationResults[0].id);
           setIsPlaying(true);
+          generationSucceeded = true; // 生成成功
         }
 
       } else {
@@ -315,18 +311,30 @@ const Workstation: React.FC<WorkstationProps> = ({ onCreditUpdate }) => {
         
         if (results.length > 0) {
           setSelectedImageId(results[0].id);
+          generationSucceeded = true; // 生成成功
+        }
+      }
+
+      // 生成成功後にクレジット消費
+      if (generationSucceeded) {
+        const consumed = await consumeCredits(resolution);
+        if (!consumed) {
+          console.error('クレジット消費に失敗しましたが、画像は生成されました');
+          // ユーザーに通知（オプション）
+          setError('クレジット消費に失敗しました。サポートにお問い合わせください。');
         }
       }
 
     } catch (err: any) {
       console.error(err);
       setError(err.message || "生成中に予期せぬエラーが発生しました。");
+      // エラー時はクレジット消費しない
     } finally {
       setIsProcessing(false);
       setProgress(100);
     }
   };
-
+  
   // Animation Loop
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
