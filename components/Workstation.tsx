@@ -334,7 +334,7 @@ const Workstation: React.FC<WorkstationProps> = ({ onCreditUpdate }) => {
       setProgress(100);
     }
   };
-  
+
   // Animation Loop
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -924,11 +924,11 @@ const Workstation: React.FC<WorkstationProps> = ({ onCreditUpdate }) => {
             <div className="text-xs text-slate-600 space-y-1">
               <div className="flex justify-between">
                 <span>1K生成コスト:</span>
-                <span className="font-semibold">{CREDIT_COST_1K}cr (50円)</span>
+                <span className="font-semibold">{CREDIT_COST_1K}cr</span>
               </div>
               <div className="flex justify-between">
                 <span>4K生成コスト:</span>
-                <span className="font-semibold">{CREDIT_COST_4K}cr (90円)</span>
+                <span className="font-semibold">{CREDIT_COST_4K}cr</span>
               </div>
               <div className="mt-2 pt-2 border-t border-green-200">
                 <div className="flex justify-between">

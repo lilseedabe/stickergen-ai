@@ -112,7 +112,7 @@ const PurchasePage: React.FC = () => {
               クレジット購入
             </h1>
             <p className="text-slate-600 text-lg">
-              業界最安値クラス！1回50円で12個のスタンプを生成
+              業界最安値クラス！1回5crで12個のスタンプを生成
             </p>
             {apiService.isAuthenticated() && (
               <div className="mt-4 inline-block bg-white px-6 py-3 rounded-full shadow-md border border-green-200">
