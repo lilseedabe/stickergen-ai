@@ -8,8 +8,9 @@ import Terms from './pages/Terms';           // 追加
 import Privacy from './pages/Privacy';       // 追加
 import Commerce from './pages/Commerce';     // 追加
 import Contact from './pages/Contact';       // 追加
+import Admin from './pages/Admin';  // ← 追加
 
-type Page = 'workstation' | 'purchase' | 'terms' | 'privacy' | 'commerce' | 'contact';
+type Page = 'workstation' | 'purchase' | 'terms' | 'privacy' | 'commerce' | 'contact' | 'admin';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('workstation');
@@ -27,6 +28,8 @@ const App: React.FC = () => {
     const path = window.location.pathname;
     if (path === '/purchase') {
       setCurrentPage('purchase');
+    } else if (path === '/admin-lilseed') {
+      setCurrentPage('admin');
     }
   }, []);
 
@@ -129,6 +132,7 @@ const App: React.FC = () => {
         {currentPage === 'privacy' && <Privacy />}
         {currentPage === 'commerce' && <Commerce />}
         {currentPage === 'contact' && <Contact />}
+        {currentPage === 'admin' && <Admin />}  {/* ← 追加 */}
       </main>
       
       <footer className="bg-slate-50 border-t border-slate-200 py-8">
