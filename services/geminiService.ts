@@ -6,7 +6,7 @@ export const generateStickerImage = async (
 ): Promise<string[]> => {
   try {
     // バックエンドAPIを呼ぶ
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     
     const response = await fetch('/api/generate/sticker', {
       method: 'POST',
