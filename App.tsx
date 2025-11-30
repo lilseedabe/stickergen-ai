@@ -4,8 +4,12 @@ import Workstation from './components/Workstation';
 import PurchasePage from './components/PurchasePage';
 import Auth from './components/Auth';
 import { apiService } from './services/apiService';
+import Terms from './pages/Terms';           // 追加
+import Privacy from './pages/Privacy';       // 追加
+import Commerce from './pages/Commerce';     // 追加
+import Contact from './pages/Contact';       // 追加
 
-type Page = 'workstation' | 'purchase';
+type Page = 'workstation' | 'purchase' | 'terms' | 'privacy' | 'commerce' | 'contact';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('workstation');
@@ -119,15 +123,36 @@ const App: React.FC = () => {
       </header>
 
       <main className="flex-1">
-        {currentPage === 'workstation' ? (
-          <Workstation onCreditUpdate={handleCreditUpdate} />
-        ) : (
-          <PurchasePage />
-        )}
+        {currentPage === 'workstation' && <Workstation onCreditUpdate={handleCreditUpdate} />}
+        {currentPage === 'purchase' && <PurchasePage />}
+        {currentPage === 'terms' && <Terms />}
+        {currentPage === 'privacy' && <Privacy />}
+        {currentPage === 'commerce' && <Commerce />}
+        {currentPage === 'contact' && <Contact />}
       </main>
-
-      <footer className="py-6 text-center text-slate-400 text-sm">
-        <p>Powered by Gemini 3.0 Pro Image & React</p>
+      
+      <footer className="bg-slate-50 border-t border-slate-200 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-slate-600 text-sm">
+              © 2025 LiLseed LLC. All rights reserved.
+            </div>
+            <div className="flex gap-6 text-sm">
+              <button onClick={() => navigateTo('terms')} className="text-slate-600 hover:text-green-600 transition">
+                利用規約
+              </button>
+              <button onClick={() => navigateTo('commerce')} className="text-slate-600 hover:text-green-600 transition">
+                特定商取引法
+              </button>
+              <button onClick={() => navigateTo('privacy')} className="text-slate-600 hover:text-green-600 transition">
+                プライバシーポリシー
+              </button>
+              <button onClick={() => navigateTo('contact')} className="text-slate-600 hover:text-green-600 transition">
+                お問い合わせ
+              </button>
+            </div>
+          </div>
+        </div>
       </footer>
 
       {/* Auth Modal */}
